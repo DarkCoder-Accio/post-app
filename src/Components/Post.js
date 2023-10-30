@@ -1,7 +1,9 @@
 import React,{useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { post_fetch_error, post_fetch_success,post_fetching } from "../redux/actions/postActions";
+// import { post_fetch_error, post_fetch_success,post_fetching } from "../redux/actions/postActions";
+
+import { fetchPost } from "../redux/actions/postActions";
 
 
 const Post = () => {
@@ -16,20 +18,21 @@ const dispatch = useDispatch();
    
 useEffect(()=>{
     console.log("useEffect called");
-    fetchPost();
+    // fetchPost();
+    dispatch(fetchPost());
 },[])
 
 
-async function fetchPost(){
-    try{
-        dispatch(post_fetching());
-        const response = await axios.get("https://gauravgitacc.github.io/postAppData/posts.json")
-        dispatch(post_fetch_success(response.data))
-    }
-    catch(error){
-        dispatch(post_fetch_error(error.message))
-    }
-}
+// async function fetchPost(){
+//     try{
+//         dispatch(post_fetching());  // loading
+//         const response = await axios.get("https://gauravgitacc.github.io/postAppData/posts.json")
+//         dispatch(post_fetch_success(response.data)) // data
+//     }
+//     catch(error){
+//         dispatch(post_fetch_error(error.message)) // error
+//     }
+// }
 
     return(
         <div>

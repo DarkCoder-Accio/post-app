@@ -1,4 +1,5 @@
 import { POST_FETCHING, POST_FETCH_SUCCESS,POST_FETCH_ERROR } from "./actionTypes";
+import axios from "axios";
 
 // let intialState = {
 //     loading: false,
@@ -25,3 +26,19 @@ export const post_fetch_error = (error)=>{
         payload: error
     }
 }
+
+
+export const fetchPost = ()=>{
+    return async function(dispatch){
+    try{
+        dispatch(post_fetching());  // loading
+        const response = await axios.get("https://gauravgitacc.github.io/postAppData/posts.json")
+        dispatch(post_fetch_success(response.data)) // data
+    }
+    catch(error){
+        dispatch(post_fetch_error(error.message)) // error
+    }
+    }
+}
+
+
